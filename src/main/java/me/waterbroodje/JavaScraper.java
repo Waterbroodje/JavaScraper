@@ -2,6 +2,7 @@ package me.waterbroodje;
 
 import me.waterbroodje.service.DynamicScrapeService;
 import me.waterbroodje.service.StaticScrapeService;
+import org.jsoup.nodes.Document;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,11 +17,15 @@ public class JavaScraper {
         this.staticScrapeService = new StaticScrapeService();
     }
 
-    public String getStaticPage(String url, boolean includeUserAgent, boolean followRedirects, Map<String, String> headers) {
+    public String getStaticSource(String url, boolean includeUserAgent, boolean followRedirects, Map<String, String> headers) {
         return staticScrapeService.scrapePage(url, includeUserAgent, followRedirects, headers);
     }
 
-    public String getDynamicPage(String url, boolean headless, int wait) {
+    public Document getStaticDocument(String url, boolean includeUserAgent, boolean followRedirects, Map<String, String> headers) {
+        return staticScrapeService.scrapeDocument(url, includeUserAgent, followRedirects, headers);
+    }
+
+    public String getDynamicSource(String url, boolean headless, int wait) {
         return dynamicScrapeService.scrapePage(url, headless, wait);
     }
 
